@@ -52,7 +52,7 @@ def tryletter(prefix, letter):
     # response = requests.post(url, data=body_string_test, headers=headers) #proxies = { "http" : "http://127.0.0.1:9090"})
     # response = requests.post(url, data=body_string_test, headers=headers, proxies = { "http" : "http://127.0.0.1:9090"})
     new_url = url + "&" + body_string_test
-    response = requests.get(new_url, data=body_string_test, headers=headers, proxies = { "http" : "http://127.0.0.1:9090"})
+    response = requests.get(new_url, data=body_string_test, headers=headers)#, proxies = { "http" : "http://127.0.0.1:9090"})
 
     print(test_password + " " + str(response.elapsed.total_seconds()))
 
